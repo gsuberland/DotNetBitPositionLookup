@@ -1,7 +1,7 @@
 ﻿// uncomment this if you want to verify that the set bit counts match up across lookup/calculate.
 //#define VERIFY_COUNTS
 // uncomment this if you want to verify that the first bit indices match up across lookup/calculate.
-#define VERIFY_FIRST
+//#define VERIFY_FIRST
 // ^ setting either of these can skew the benchmarks a bit since you're adding a .Count() or .FirstOrDefault() call into each check.
 
 using System;
@@ -11,6 +11,9 @@ using System.Linq;
 
 class Program
 {
+	// specify seed for reproducibility
+	static Random rng = new Random(0x5E7B175);
+
 	static byte[] bytePool = null;
 	static sbyte[] sbytePool = null;
 	static ushort[] ushortPool = null;
@@ -366,7 +369,6 @@ class Program
 	{
 		Console.Write("Filling pools.");
 
-		var rng = new Random();
 		// fill byte
 		rng.NextBytes(bytePool);
 		Console.Write(".");

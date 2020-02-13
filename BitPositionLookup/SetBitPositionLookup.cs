@@ -57,8 +57,11 @@ public static class SetBitPositionLookup
 		return lut;
 	}
 
-	public static IEnumerable<int> Lookup(byte value)
+	public static int[] Lookup(byte value)
 	{
+		if (value == 0)
+			return new int[] { };
+
 		// get the 8-bit LUT
 		var lut = BitPositionLookup8.Value;
 
@@ -82,8 +85,11 @@ public static class SetBitPositionLookup
 		return positions;
 	}
 
-	public static IEnumerable<int> Lookup(UInt16 value)
+	public static int[] Lookup(UInt16 value)
 	{
+		if (value == 0)
+			return new int[] { };
+
 		// get the 16-bit LUT
 		var lut = BitPositionLookup16.Value;
 
@@ -107,39 +113,99 @@ public static class SetBitPositionLookup
 		return positions;
 	}
 
+	public static int GetSetBitCount(uint i)
+	{
+		i = i - ((i >> 1) & 0x55555555U);
+		i = (i & 0x33333333U) + ((i >> 2) & 0x33333333U);
+		return (int)(unchecked(((i + (i >> 4)) & 0x0F0F0F0FU) * 0x01010101U) >> 24);
+	}
+
+	public static int GetSetBitCount(ulong i)
+	{
+		i = i - ((i >> 1) & 0x5555555555555555UL);
+		i = (i & 0x3333333333333333UL) + ((i >> 2) & 0x3333333333333333UL);
+		return (int)(unchecked(((i + (i >> 4)) & 0xF0F0F0F0F0F0F0FUL) * 0x101010101010101UL) >> 56);
+	}
+
 	public static IEnumerable<int> Lookup(UInt32 value)
 	{
+		if (value == 0)
+			return new int[] { };
+
+		// find the number of set bits for the input value
+		int setBitCount = GetSetBitCount(value);
+		// we now know how many results we will have, so we can use a fixed array size
+		int[] results = new int[setBitCount];
+
 		UInt16 a = unchecked((UInt16)(value & 0xFFFFU));
 		UInt16 b = unchecked((UInt16)((value >> 16) & 0xFFFFU));
-		return
-			Lookup(a) // get positions for lower 16-bit chunk
-			.Concat(
-				Lookup(b) // get positions for upper 16-bit chunk
-				.Select(pos => pos + 16) // offset the positions by 16
-			);
+
+		var lowPositions = Lookup(a); // get positions for lower 16-bit chunk
+		Array.Copy(lowPositions, 0, results, 0, lowPositions.Length);
+
+		if (b != 0)
+		{
+			var highPositions = Lookup(b); // get positions for upper 16-bit chunk
+			int offset = lowPositions.Length;
+			for (int i = 0; i < highPositions.Length; i++)
+			{
+				results[offset + i] = highPositions[i] + 16; // offset indices by 16
+			}
+		}
+
+		return results;
 	}
 
 	public static IEnumerable<int> Lookup(UInt64 value)
 	{
+		if (value == 0)
+			return new int[] { };
+
+		// use the popcnt intrinsic to find the number of set bits for the input value
+		int setBitCount = GetSetBitCount(value);
+		// we now know how many results we will have, so we can use a fixed array size
+		int[] results = new int[setBitCount];
+
 		UInt16 a = unchecked((UInt16)(value & 0xFFFFU));
 		UInt16 b = unchecked((UInt16)((value >> 16) & 0xFFFFU));
 		UInt16 c = unchecked((UInt16)((value >> 32) & 0xFFFFU));
 		UInt16 d = unchecked((UInt16)((value >> 48) & 0xFFFFU));
 
-		return
-			Lookup(a) // get positions for low 16-bit chunk
-			.Concat(
-				Lookup(b) // get positions for mid-low 16-bit chunk
-				.Select(pos => pos + 16) // offset the positions by 16
-			)
-			.Concat(
-				Lookup(c) // get positions for mid-high 16-bit chunk
-				.Select(pos => pos + 32) // offset the positions by 32
-			)
-			.Concat(
-				Lookup(d) // get positions for high 16-bit chunk
-				.Select(pos => pos + 48) // offset the positions by 48
-			);
+		var lowPositions = Lookup(a); // get positions for lower 16-bit chunk
+		Array.Copy(lowPositions, 0, results, 0, lowPositions.Length);
+
+		int offset = lowPositions.Length;
+
+		if (b != 0)
+		{
+			var bitPositions = Lookup(b); // get positions for mid-low 16-bit chunk
+			for (int i = 0; i < bitPositions.Length; i++)
+			{
+				results[offset + i] = bitPositions[i] + 16; // offset indices by 16
+			}
+			offset += bitPositions.Length;
+		}
+
+		if (c != 0)
+		{
+			var bitPositions = Lookup(c); // get positions for mid-high 16-bit chunk
+			for (int i = 0; i < bitPositions.Length; i++)
+			{
+				results[offset + i] = bitPositions[i] + 32; // offset indices by 32
+			}
+			offset += bitPositions.Length;
+		}
+
+		if (d != 0)
+		{
+			var bitPositions = Lookup(d); // get positions for high 16-bit chunk
+			for (int i = 0; i < bitPositions.Length; i++)
+			{
+				results[offset + i] = bitPositions[i] + 48; // offset indices by 48
+			}
+		}
+
+		return results;
 	}
 
 	public static IEnumerable<int> Lookup(sbyte value) => Lookup(unchecked((byte)value));
