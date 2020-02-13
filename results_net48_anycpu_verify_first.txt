@@ -1,0 +1,182 @@
+Forcing table generation before benchmark...
+(byte)53  = [ 0, 2, 4, 5 ]
+8-bit LUT generation took 1.0485ms
+(ushort)53 = [ 0, 2, 4, 5 ]
+16-bit LUT generation took 5.5429ms
+
+Beginning benchmarks.
+
+
+Testing 1K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 2.661      | 0.425      |
+| sbyte  | 0.256      | 0.271      |
+| ushort | 0.289      | 0.438      |
+| short  | 0.255      | 0.306      |
+| int    | 0.636      | 0.526      |
+| uint   | 0.461      | 0.497      |
+| long   | 0.983      | 0.626      |
+| ulong  | 0.619      | 0.806      |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
+
+
+Testing 8K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 0.645      | 0.876      |
+| sbyte  | 0.649      | 0.868      |
+| ushort | 0.970      | 2.116      |
+| short  | 0.735      | 1.129      |
+| int    | 1.621      | 1.718      |
+| uint   | 1.620      | 1.647      |
+| long   | 2.072      | 2.128      |
+| ulong  | 2.387      | 4.513      |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
+
+
+Testing 64K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 4.888      | 5.179      |
+| sbyte  | 5.308      | 6.002      |
+| ushort | 7.378      | 10.271     |
+| short  | 7.056      | 10.354     |
+| int    | 14.562     | 16.936     |
+| uint   | 14.810     | 17.130     |
+| long   | 16.811     | 18.003     |
+| ulong  | 20.788     | 35.975     |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
+
+
+Testing 256K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 19.678     | 22.564     |
+| sbyte  | 17.834     | 18.563     |
+| ushort | 23.746     | 36.813     |
+| short  | 23.082     | 39.064     |
+| int    | 54.984     | 67.107     |
+| uint   | 58.837     | 63.703     |
+| long   | 70.515     | 68.784     |
+| ulong  | 83.651     | 149.077    |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
+
+
+Testing 512K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 39.338     | 41.337     |
+| sbyte  | 41.382     | 38.946     |
+| ushort | 46.109     | 71.102     |
+| short  | 55.318     | 69.866     |
+| int    | 96.679     | 127.626    |
+| uint   | 100.069    | 115.457    |
+| long   | 118.878    | 143.437    |
+| ulong  | 160.549    | 319.893    |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
+
+
+Testing 1024K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 72.883     | 77.292     |
+| sbyte  | 73.255     | 82.253     |
+| ushort | 91.062     | 146.909    |
+| short  | 95.748     | 141.013    |
+| int    | 183.347    | 236.702    |
+| uint   | 198.217    | 235.569    |
+| long   | 246.777    | 289.701    |
+| ulong  | 365.510    | 670.811    |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
+
+
+Testing 4096K elements:
+Filling pools.........
++--------+------------+------------+
+| Type   | Lookup     | Calculate  |
++--------+------------+------------+
+| byte   | 347.727    | 311.418    |
+| sbyte  | 291.944    | 360.091    |
+| ushort | 385.400    | 558.926    |
+| short  | 386.992    | 558.405    |
+| int    | 793.236    | 950.839    |
+| uint   | 809.880    | 925.413    |
+| long   | 964.557    | 1149.225   |
+| ulong  | 1295.067   | 2416.286   |
++--------+------------+------------+
+
+Test 1: PASS
+Test 2: PASS
+Test 3: PASS
+Test 4: PASS
+Test 5: PASS
+Test 6: PASS
+Test 7: PASS
+Test 8: PASS
