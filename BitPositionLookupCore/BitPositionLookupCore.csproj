@@ -54,6 +54,10 @@
     <DefineConstants>TRACE;VERIFY_FIRST</DefineConstants>
     <Optimize>true</Optimize>
   </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
+    <DefineConstants>WIN64;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\Shared\Benchmark.cs" Link="Benchmark.cs" />

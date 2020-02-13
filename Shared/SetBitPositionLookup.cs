@@ -133,7 +133,12 @@ public static class SetBitPositionLookup
 	{
 #if NETCOREAPP
 		// use the popcnt intrinsic to find the number of set bits for the input value
+#if WIN64
 		return Popcnt.X64.PopCount(i);
+#else
+		return Popcnt.PopCount(unchecked((uint)(i & 0xFFFFFFFFUL))) +
+			Popcnt.PopCount(unchecked((uint)((i >> 32) & 0xFFFFFFFFUL)));
+#endif
 #else
 		i = i - ((i >> 1) & 0x5555555555555555UL);
 		i = (i & 0x3333333333333333UL) + ((i >> 2) & 0x3333333333333333UL);
