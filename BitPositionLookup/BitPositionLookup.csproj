@@ -153,10 +153,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Shared\Benchmark.cs">
+      <Link>Benchmark.cs</Link>
+    </Compile>
     <Compile Include="..\Shared\SetBitPositionLookup.cs">
       <Link>SetBitPositionLookup.cs</Link>
     </Compile>
-    <Compile Include="Benchmark.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

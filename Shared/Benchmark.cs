@@ -1,8 +1,5 @@
-﻿// uncomment this if you want to verify that the set bit counts match up across lookup/calculate.
-//#define VERIFY_COUNTS
-// uncomment this if you want to verify that the first bit indices match up across lookup/calculate.
-//#define VERIFY_FIRST
-// ^ setting either of these can skew the benchmarks a bit since you're adding a .Count() or .FirstOrDefault() call into each check.
+﻿// The VERIFY_COUNTS and VERIFY_FIRST symbols can be defined in order to verify that the bit position counts and first index values match between LUT and calc approaches.
+// Setting either of these can skew the benchmarks a bit since you're adding a .Count() or .FirstOrDefault() call into each check, so take the resulting numbers with a grain of salt.
 
 using System;
 using System.Collections.Generic;
@@ -78,7 +75,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -92,7 +89,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -110,7 +107,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -124,7 +121,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -142,7 +139,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -156,7 +153,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -174,7 +171,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -188,7 +185,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -206,7 +203,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -220,7 +217,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -238,7 +235,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -252,7 +249,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -270,7 +267,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -284,7 +281,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
@@ -302,7 +299,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				},
 				() =>
@@ -316,7 +313,7 @@ class Program
 #elif VERIFY_FIRST
 					r += luts.FirstOrDefault();
 #endif
-					}
+				}
 					return r;
 				});
 
