@@ -56,9 +56,9 @@ int[] GetSetBitPositions(ulong value)
     ushort d = unchecked((ushort)((value >> 48) & 0xFFFFU));
     
     return GetSetBitPositions(a)
-        .Concat(GetSetBitPositions(b))
-        .Concat(GetSetBitPositions(c))
-        .Concat(GetSetBitPositions(d))
+        .Concat(GetSetBitPositions(b).Select(p => p + 16))
+        .Concat(GetSetBitPositions(c).Select(p => p + 32))
+        .Concat(GetSetBitPositions(d).Select(p => p + 48))
         .ToArray();
 }
 ```
