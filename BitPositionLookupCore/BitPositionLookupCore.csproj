@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -54,5 +54,9 @@
     <DefineConstants>TRACE;VERIFY_FIRST</DefineConstants>
     <Optimize>true</Optimize>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\SetBitPositionLookup.cs" Link="SetBitPositionLookup.cs" />
+  </ItemGroup>
 
 </Project>

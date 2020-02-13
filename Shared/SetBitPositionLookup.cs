@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+#if NETCOREAPP
+using System.Runtime.Intrinsics.X86;
+#endif
 
 public static class SetBitPositionLookup
 {
@@ -113,18 +116,29 @@ public static class SetBitPositionLookup
 		return positions;
 	}
 
-	public static int GetSetBitCount(uint i)
+	public static uint GetSetBitCount(uint i)
 	{
+
+#if NETCOREAPP
+		// use the popcnt intrinsic to find the number of set bits for the input value
+		return Popcnt.PopCount(i);
+#else
 		i = i - ((i >> 1) & 0x55555555U);
 		i = (i & 0x33333333U) + ((i >> 2) & 0x33333333U);
-		return (int)(unchecked(((i + (i >> 4)) & 0x0F0F0F0FU) * 0x01010101U) >> 24);
+		return (uint)(unchecked(((i + (i >> 4)) & 0x0F0F0F0FU) * 0x01010101U) >> 24);
+#endif
 	}
 
-	public static int GetSetBitCount(ulong i)
+	public static ulong GetSetBitCount(ulong i)
 	{
+#if NETCOREAPP
+		// use the popcnt intrinsic to find the number of set bits for the input value
+		return Popcnt.X64.PopCount(i);
+#else
 		i = i - ((i >> 1) & 0x5555555555555555UL);
 		i = (i & 0x3333333333333333UL) + ((i >> 2) & 0x3333333333333333UL);
-		return (int)(unchecked(((i + (i >> 4)) & 0xF0F0F0F0F0F0F0FUL) * 0x101010101010101UL) >> 56);
+		return (ulong)(unchecked(((i + (i >> 4)) & 0xF0F0F0F0F0F0F0FUL) * 0x101010101010101UL) >> 56);
+#endif
 	}
 
 	public static IEnumerable<int> Lookup(UInt32 value)
@@ -133,7 +147,7 @@ public static class SetBitPositionLookup
 			return new int[] { };
 
 		// find the number of set bits for the input value
-		int setBitCount = GetSetBitCount(value);
+		uint setBitCount = GetSetBitCount(value);
 		// we now know how many results we will have, so we can use a fixed array size
 		int[] results = new int[setBitCount];
 
@@ -162,7 +176,7 @@ public static class SetBitPositionLookup
 			return new int[] { };
 
 		// use the popcnt intrinsic to find the number of set bits for the input value
-		int setBitCount = GetSetBitCount(value);
+		ulong setBitCount = GetSetBitCount(value);
 		// we now know how many results we will have, so we can use a fixed array size
 		int[] results = new int[setBitCount];
 

@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPositionLookup", "BitPos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitPositionLookupCore", "BitPositionLookupCore\BitPositionLookupCore.csproj", "{7228E406-AC10-49F7-9DD4-0B7CFF18A435}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8B7F6E8F-194A-497A-865B-738D03075FE0}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\SetBitPositionLookup.cs = Shared\SetBitPositionLookup.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
