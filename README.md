@@ -1,6 +1,6 @@
 # .NET Bit Position Lookup Performance
 
-This repo contains some code that tests the performance of two different approaches to finding the indices of set bits in a number:
+Inspired by [this StackOverflow question](https://stackoverflow.com/questions/12171584/what-is-the-fastest-way-to-count-set-bits-in-uint32/57940252), this repo contains some code that tests the performance of two different approaches to finding the indices of set bits in a number:
 
 1. Loop through all the bits and store the indices of the set bits.
 2. Generate a lookup table that precomputes the indices for 8-bit and 16-bit values. For 32-bit and 64-bit integers, split the number up into 16-bit chunks and combine the results.
